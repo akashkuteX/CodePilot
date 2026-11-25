@@ -30,3 +30,6 @@ data/
 # Operating system
 .DS_Store
 Thumbs.db
+
+# Personal learning notes
+/notes/
