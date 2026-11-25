@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Node.js
+node_modules/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# Local AI models and data
+models/
+data/
+*.gguf
+*.safetensors
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
