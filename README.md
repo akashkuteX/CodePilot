@@ -28,8 +28,8 @@ Ollama, Sentence Transformers, Redis, Docker.
 ## Development Progress
 
 - [x] Project initialization
-- [ ] Repository scanning
-- [ ] AST-based code chunking
+- [x] Repository scanning
+- [x] AST-based code chunking
 - [ ] Embedding generation
 - [ ] Vector search
 - [ ] Repository-aware chat
@@ -45,3 +45,13 @@ Ollama, Sentence Transformers, Redis, Docker.
 - Privacy-conscious architecture
 - Modular and maintainable code
 - Incremental development with automated tests
+
+## Testing
+
+Install development dependencies:
+
+    pip install -r backend/requirements-dev.txt
+
+Run the test suite:
+
+    python -m pytest backend/tests -v
