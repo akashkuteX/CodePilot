@@ -1,57 +1,39 @@
-# CodePilot
+## Day 2 — Semantic Search & Vector Storage
 
-An open-source, repository-aware AI coding assistant
-inspired by modern AI-native IDE architectures.
+- [x] Local embedding generation using Sentence Transformers
+- [x] 384-dimensional normalized embeddings
+- [x] Cosine similarity and dot product
+- [x] In-memory semantic search
+- [x] PostgreSQL and pgvector integration
+- [x] Persistent vector storage
+- [x] Upsert-based duplicate prevention
+- [x] Database connection timeouts
+- [x] HNSW index configuration
+- [x] Persistent semantic search engine
+- [x] Command-line interface
+- [x] Automated embedding and similarity tests
 
-## Objective
+### Technology Stack
 
-Build a privacy-conscious coding assistant using
-local LLMs and open-source infrastructure.
+- Python
+- Sentence Transformers (all-MiniLM-L6-v2)
+- PostgreSQL 16
+- pgvector
+- Docker Compose
+- Psycopg
+- NumPy
+- Pytest
 
-## Planned Features
+### Usage
 
-- AST-based semantic code chunking
-- Code embeddings and vector search
-- Repository-aware RAG
-- Incremental indexing using Merkle trees
-- AI-powered code completion
-- VS Code extension
-- Agentic coding workflows
-- Caching and model routing
-- Automated evaluation and testing
+```bash
+docker compose up -d
 
-## Technology Stack
+python cli.py index --path .
 
-Python, FastAPI, TypeScript, PostgreSQL, pgvector,
-Ollama, Sentence Transformers, Redis, Docker.
+python cli.py count
 
-## Development Progress
+python cli.py search --query "How does authentication work?" --top-k 3
+```
 
-- [x] Project initialization
-- [x] Repository scanning
-- [x] AST-based code chunking
-- [ ] Embedding generation
-- [ ] Vector search
-- [ ] Repository-aware chat
-- [ ] Incremental indexing
-- [ ] VS Code integration
-- [ ] Code completion
-- [ ] Agentic workflows
-
-## Design Principles
-
-- Local-first development
-- No paid API dependencies
-- Privacy-conscious architecture
-- Modular and maintainable code
-- Incremental development with automated tests
-
-## Testing
-
-Install development dependencies:
-
-    pip install -r backend/requirements-dev.txt
-
-Run the test suite:
-
-    python -m pytest backend/tests -v
+All embedding generation and vector storage operate locally without paid API dependencies.
