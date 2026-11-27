@@ -1,6 +1,7 @@
 import math
 
 from ..retrieval.models import SearchResult
+from .context_models import Source, BuiltContext
 
 
 class ContextBuilder:
@@ -45,33 +46,46 @@ class ContextBuilder:
 
         return selected
 
-    def build(
-        self,
-        results: list[SearchResult]
-    ) -> str:
+    def build(self, results: list[SearchResult]) -> BuiltContext:
 
         results = self.remove_redundant_chunks(results)
 
         sections = []
+        sources = []
 
         for result in results:
             chunk = result.chunk
+            source_id = len(sections) + 1
 
-            # Include source metadata for citations
+            # Format the source context
             section = (
-                f"[Source {len(sections) + 1}]\n"
+                f"[Source {source_id}]\n"
                 f"File: {chunk.file_path}\n"
                 f"Symbol: {chunk.symbol_name}\n"
                 f"Lines: {chunk.start_line}-{chunk.end_line}\n"
                 f"Code:\n{chunk.code}"
             )
 
-            # Check the context budget
             candidate = "\n\n".join(sections + [section])
 
+            # Enforce the estimated context budget
             if self.estimate_tokens(candidate) > self.max_context_tokens:
                 continue
 
             sections.append(section)
 
-        return "\n\n".join(sections)
+            # Store trusted source metadata
+            sources.append(
+                Source(
+                    source_id=source_id,
+                    file_path=chunk.file_path,
+                    symbol_name=chunk.symbol_name,
+                    start_line=chunk.start_line,
+                    end_line=chunk.end_line
+                )
+            )
+
+        return BuiltContext(
+            text="\n\n".join(sections),
+            sources=sources
+        )
